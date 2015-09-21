@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        Log.v(TAG, "we are here");
         rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
         ean = (EditText) rootView.findViewById(R.id.ean);
 
@@ -87,6 +88,16 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             }
         });
 
+        Bundle args = getArguments();
+        if(args != null) {
+            String barcode = args.getString("barcode");
+            if(barcode != null) {
+                Log.v(TAG, "barcode = " + barcode);
+                ean.setText(barcode);
+            }
+        }
+
+
         rootView.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,13 +106,8 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
                 //functionality directly in this app.
                 // Hint: Use a Try/Catch block to handle the Intent dispatch gracefully, if you
                 // are using an external app.
-                //when you're done, remove the toast below.
-                Context context = getActivity();
-                CharSequence text = "This button should let you scan a book for its barcode!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                Intent scanIntent = new Intent(getActivity(), ScanBarCodeActivity.class);
+                getActivity().startActivity(scanIntent);
 
             }
         });
