@@ -2,11 +2,16 @@ package it.jaschke.alexandria.services;
 
 import android.app.IntentService;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +37,7 @@ import it.jaschke.alexandria.data.AlexandriaContract;
 public class BookService extends IntentService {
 
     private final String LOG_TAG = BookService.class.getSimpleName();
+    private Handler mHandler;
 
     public static final String FETCH_BOOK = "it.jaschke.alexandria.services.action.FETCH_BOOK";
     public static final String DELETE_BOOK = "it.jaschke.alexandria.services.action.DELETE_BOOK";
@@ -40,6 +46,12 @@ public class BookService extends IntentService {
 
     public BookService() {
         super("Alexandria");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mHandler = new Handler();
     }
 
     @Override
@@ -66,6 +78,18 @@ public class BookService extends IntentService {
         }
     }
 
+    private boolean checkInternetConnection() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        return isConnected;
+    }
+
+
     /**
      * Handle action fetchBook in the provided background thread with the provided
      * parameters.
@@ -73,6 +97,19 @@ public class BookService extends IntentService {
     private void fetchBook(String ean) {
 
         if(ean.length()!=13){
+            return;
+        }
+
+        boolean isConnected = checkInternetConnection();
+        Log.v(LOG_TAG, "Network is " + isConnected);
+        if (!isConnected) {
+            Log.e(LOG_TAG, "Network is not available");
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(BookService.this,  R.string.network_not_available_message, Toast.LENGTH_LONG).show();
+                }
+            });
             return;
         }
 

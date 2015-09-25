@@ -31,4 +31,5 @@
     <string name="title_activity_scan_bar_code">ScanBarCodeActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="network_not_available_message">No network connection</string>
 </resources>
