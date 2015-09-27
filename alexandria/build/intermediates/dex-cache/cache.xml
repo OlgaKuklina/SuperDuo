@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/jacoco/jacocoagent.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="05d4f9e6f36f58a60dc65a4b1af30ee76201a530">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/jacocoagent-4c440879c2dc958cdae1abd7513b9d9a6cfa5460.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.2.0/e019d15a13a9786f881141d2df6654b8510bce8b/core-3.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e019d15a13a9786f881141d2df6654b8510bce8b">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/core-3.2.0-15cb87272c9e8e745df7c6426e83f307ff68c989.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/exploded-aar/me.dm7.barcodescanner/zxing/1.8.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c87c4f493c82d2de01bddf6b1084c92dd670b053">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/classes-28e89e84a233e63e54a93a8851d6d8fd68b99f7a.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/classes-2c634666128badcfb16ec2c37048b902af51e693.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.8.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="96c83d4de6289a3f674165f896ac992564a7138d">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/classes-6311ee2e8d307968e625f76cac15dcda5a1fe20f.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-5c1a063439dce207f453508c8911f259cd5aaae4.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidDevelopment/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-93dd78e4aed237ffe509599da478909d57005124.jar" />
+    </item>
+    <item
+        jar="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/olgakuklina/AndroidStudioProjects/super duo/alexandria/app/build/intermediates/pre-dexed/debug/classes-5612b8e1a7af0e42f926b9b298b8b83647f1d939.jar" />
+    </item>
+
+</items>
