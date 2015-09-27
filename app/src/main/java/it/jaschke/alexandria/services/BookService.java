@@ -104,6 +104,7 @@ public class BookService extends IntentService {
         Log.v(LOG_TAG, "Network is " + isConnected);
         if (!isConnected) {
             Log.e(LOG_TAG, "Network is not available");
+
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {

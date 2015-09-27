@@ -32,4 +32,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="network_not_available_message">No network connection</string>
+    <string name="title_not_available_text">No book title</string>
+    <string name="authors_not_available_text">No authors </string>
 </resources>
