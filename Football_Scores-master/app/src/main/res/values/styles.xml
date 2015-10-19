@@ -5,4 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="MyAppTheme" parent="AppTheme">
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
 </resources>

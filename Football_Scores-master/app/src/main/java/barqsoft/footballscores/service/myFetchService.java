@@ -1,6 +1,7 @@
 package barqsoft.footballscores.service;
 
 import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,7 @@ public class myFetchService extends IntentService
         getData("n2");
         getData("p2");
 
-        return;
+        notifyWidget(intent.getIntArrayExtra("appWidgetIds"));
     }
 
     private void getData (String timeFrame)
@@ -61,6 +62,7 @@ public class myFetchService extends IntentService
         //Opening Connection
         try {
             URL fetch = new URL(fetch_build.toString());
+            Log.v(LOG_TAG, "fetch " + fetch);
             m_connection = (HttpURLConnection) fetch.openConnection();
             m_connection.setRequestMethod("GET");
             m_connection.addRequestProperty("X-Auth-Token",getString(R.string.api_key));
@@ -87,6 +89,7 @@ public class myFetchService extends IntentService
                 return;
             }
             JSON_data = buffer.toString();
+            Log.v(LOG_TAG, "JSON_data " + JSON_data);
         }
         catch (Exception e)
         {
@@ -136,6 +139,7 @@ public class myFetchService extends IntentService
         //JSON data
         // This set of league codes is for the 2015/2016 season. In fall of 2016, they will need to
         // be updated. Feel free to use the codes
+        Log.v(LOG_TAG, "processJSONdata begin JSONdata = " +JSONdata);
         final String BUNDESLIGA1 = "394";
         final String BUNDESLIGA2 = "395";
         final String LIGUE1 = "396";
@@ -185,19 +189,22 @@ public class myFetchService extends IntentService
             {
 
                 JSONObject match_data = matches.getJSONObject(i);
+                Log.v(LOG_TAG, "match_data = " + match_data);
                 League = match_data.getJSONObject(LINKS).getJSONObject(SOCCER_SEASON).
                         getString("href");
-                League = League.replace(SEASON_LINK,"");
+                Log.v(LOG_TAG, "League = " + League);
+                League = League.replace(SEASON_LINK, "");
+
                 //This if statement controls which leagues we're interested in the data from.
                 //add leagues here in order to have them be added to the DB.
                 // If you are finding no data in the app, check that this contains all the leagues.
                 // If it doesn't, that can cause an empty DB, bypassing the dummy data routine.
-                if(     League.equals(PREMIER_LEAGUE)      ||
-                        League.equals(SERIE_A)             ||
-                        League.equals(BUNDESLIGA1)         ||
-                        League.equals(BUNDESLIGA2)         ||
-                        League.equals(PRIMERA_DIVISION)     )
-                {
+//                if(     League.equals(PREMIER_LEAGUE)      ||
+//                        League.equals(SERIE_A)             ||
+//                        League.equals(BUNDESLIGA1)         ||
+//                        League.equals(BUNDESLIGA2)         ||
+//                        League.equals(PRIMERA_DIVISION)     )
+//                {
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).
                             getString("href");
                     match_id = match_id.replace(MATCH_LINK, "");
@@ -257,19 +264,27 @@ public class myFetchService extends IntentService
                     //Log.v(LOG_TAG,Away_goals);
 
                     values.add(match_values);
-                }
+//                }
             }
             int inserted_data = 0;
             ContentValues[] insert_data = new ContentValues[values.size()];
             values.toArray(insert_data);
+            Log.v(LOG_TAG, "Trying to insert : " + values);
             inserted_data = mContext.getContentResolver().bulkInsert(
                     DatabaseContract.BASE_CONTENT_URI,insert_data);
 
-            //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
+            Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
         }
         catch (JSONException e)
         {
             Log.e(LOG_TAG,e.getMessage());
+        }
+    }
+    private void notifyWidget (int[] extra) {
+        if(extra != null) {
+            Intent intent = new Intent("barqsoft.footballscores.REDRAW_WIDGET");
+            intent.putExtra("appWidgetIds", extra);
+            getApplicationContext().sendBroadcast(intent);
         }
 
     }

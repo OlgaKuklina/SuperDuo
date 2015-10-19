@@ -91,5 +91,6 @@ public class PagerFragment extends Fragment
                 return dayFormat.format(dateInMillis);
             }
         }
+
     }
 }
