@@ -1,12 +1,11 @@
 package barqsoft.footballscores;
 
-import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.IBinder;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -30,6 +29,7 @@ public class StackWidgetService extends RemoteViewsService {
         public StackRemoteViewsFactory(Context applicationContext, Intent intent) {
             this.mContext = applicationContext;
         }
+
 
         @Override
         public void onCreate() {
@@ -60,8 +60,8 @@ public class StackWidgetService extends RemoteViewsService {
             rv.setTextViewText(R.id.score_textview, widgetMatchDatas.get(position).getScore());
             rv.setTextViewText(R.id.data_textview, widgetMatchDatas.get(position).getDate());
             rv.setTextViewText(R.id.away_name, widgetMatchDatas.get(position).getAwayTeamName());
-            rv.setImageViewResource(R.id.away_crest, Utilies.getTeamCrestByTeamName(widgetMatchDatas.get(position).getAwayTeamName()));
-            rv.setImageViewResource(R.id.home_crest, Utilies.getTeamCrestByTeamName(widgetMatchDatas.get(position).getHomeTeamName()));
+            rv.setImageViewResource(R.id.away_crest, Utilities.getTeamCrestByTeamName(widgetMatchDatas.get(position).getAwayTeamName()));
+            rv.setImageViewResource(R.id.home_crest, Utilities.getTeamCrestByTeamName(widgetMatchDatas.get(position).getHomeTeamName()));
 
             return rv;
         }
@@ -100,11 +100,12 @@ public class StackWidgetService extends RemoteViewsService {
                 return data;
             }
             while (cursor.moveToNext()) {
-                WidgetMatchData widgetMatchData = new WidgetMatchData(cursor.getString(scoresAdapter.COL_HOME), cursor.getString(scoresAdapter.COL_AWAY), cursor.getString(scoresAdapter.COL_HOME_GOALS) + "-" + cursor.getString(scoresAdapter.COL_AWAY_GOALS), cursor.getString(scoresAdapter.COL_DATE));
+                WidgetMatchData widgetMatchData = new WidgetMatchData(cursor.getString(ScoresAdapter.COL_HOME), cursor.getString(ScoresAdapter.COL_AWAY), cursor.getString(ScoresAdapter.COL_HOME_GOALS) + "-" + cursor.getString(ScoresAdapter.COL_AWAY_GOALS), cursor.getString(ScoresAdapter.COL_DATE));
                 if (widgetMatchData.getScore() != null && !widgetMatchData.getScore().equals("-1--1")) {
                     data.add(widgetMatchData);
                 }
             }
+            cursor.close();
             return data;
         }
 

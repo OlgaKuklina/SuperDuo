@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
-import barqsoft.footballscores.service.myFetchService;
+import barqsoft.footballscores.service.FetchService;
 
 /**
 
@@ -16,7 +16,7 @@ public class FootballScoresAppWidgetProvider extends AppWidgetProvider {
     private static final String LOG_TAG = FootballScoresAppWidgetProvider.class.getSimpleName();
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Intent service_start = new Intent(context, myFetchService.class);
+        Intent service_start = new Intent(context, FetchService.class);
         service_start.putExtra("appWidgetIds", appWidgetIds);
         context.startService(service_start);
     }
@@ -25,9 +25,6 @@ public class FootballScoresAppWidgetProvider extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         // When the user deletes the widget, delete the preference associated with it.
        final int N = appWidgetIds.length;
-//        for (int i = 0; i < N; i++) {
-//            FootballScoresAppWidgetConfigureActivity.deleteTitlePref(context, appWidgetIds[i]);
-//        }
     }
 
     @Override
@@ -53,7 +50,7 @@ public class FootballScoresAppWidgetProvider extends AppWidgetProvider {
         // into the data so that the extras will not be ignored.
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         views.setRemoteAdapter(R.id.widget_view, intent);
-
+        views.setEmptyView(R.id.widget_view, R.id.empty_view);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
