@@ -3,7 +3,6 @@ package barqsoft.footballscores;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.widget.RemoteViews;
@@ -100,7 +99,7 @@ public class StackWidgetService extends RemoteViewsService {
                 return data;
             }
             while (cursor.moveToNext()) {
-                WidgetMatchData widgetMatchData = new WidgetMatchData(cursor.getString(ScoresAdapter.COL_HOME), cursor.getString(ScoresAdapter.COL_AWAY), cursor.getString(ScoresAdapter.COL_HOME_GOALS) + "-" + cursor.getString(ScoresAdapter.COL_AWAY_GOALS), cursor.getString(ScoresAdapter.COL_DATE));
+                WidgetMatchData widgetMatchData = new WidgetMatchData(cursor.getString(ScoreAdapter.COL_HOME), cursor.getString(ScoreAdapter.COL_AWAY), cursor.getString(ScoreAdapter.COL_HOME_GOALS) + "-" + cursor.getString(ScoreAdapter.COL_AWAY_GOALS), cursor.getString(ScoreAdapter.COL_DATE));
                 if (widgetMatchData.getScore() != null && !widgetMatchData.getScore().equals("-1--1")) {
                     data.add(widgetMatchData);
                 }
